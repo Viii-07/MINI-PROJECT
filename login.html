@@ -233,28 +233,29 @@
             
             // Demo credentials validation
             if (role === 'teacher') {
-                if (teacherDatabase[teacherId] && password === 'password') {
-                    localStorage.setItem('user', JSON.stringify({
-                        role: role,
-                        teacherId: teacherId,
-                        name: teacherName
-                    }));
-                    window.location.href = 'teacher-dashboard.html';
-                } else {
-                    alert('Invalid credentials. Use any Teacher ID (T001-T005) with password: password');
-                }
-            } else if (role === 'admin') {
-                if ((teacherId === 'ADMIN' || teacherId === 'A001') && password === 'password') {
-                    localStorage.setItem('user', JSON.stringify({
-                        role: role,
-                        teacherId: teacherId,
-                        name: 'Principal Smith'
-                    }));
-                    window.location.href = 'admin-dashboard.html';
-                } else {
-                    alert('Invalid admin credentials. Use Teacher ID: ADMIN or A001, Password: password');
-                }
-            }
+    if (teacherDatabase[teacherId] && password === 'password') {
+        localStorage.setItem('user', JSON.stringify({
+            role: role,
+            teacherId: teacherId,
+            name: teacherName
+        }));
+        window.location.href = 'teacher-dashboard.html';
+    } else {
+        alert('Invalid credentials. Use any Teacher ID (T001-T005) with password: password');
+    }
+} else if (role === 'admin') {
+    if ((teacherId.toUpperCase() === 'ADMIN' || teacherId.toUpperCase() === 'A001') && password === 'password') {
+        localStorage.setItem('user', JSON.stringify({
+            role: role,
+            teacherId: teacherId.toUpperCase(),
+            name: 'Principal Smith'
+        }));
+        window.location.href = 'admin-dashboard.html';
+    } else {
+        alert('Invalid admin credentials. Use Teacher ID: ADMIN or A001, Password: password');
+    }
+}
+
         });
     </script>
 </body>
