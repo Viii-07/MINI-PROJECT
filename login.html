@@ -205,21 +205,29 @@
             'T005': 'Dr. Robert Wilson'
         };
 
-        // Auto-fill teacher name when Teacher ID is entered
-        document.getElementById('teacherId').addEventListener('input', function() {
-            const teacherId = this.value.toUpperCase();
-            const teacherNameDiv = document.getElementById('teacherNameDiv');
-            const teacherNameInput = document.getElementById('teacherName');
-            
-            if (teacherDatabase[teacherId]) {
-                teacherNameInput.value = teacherDatabase[teacherId];
-                teacherNameDiv.style.display = 'block';
-                teacherNameDiv.classList.add('animate-fade-in');
-            } else {
-                teacherNameDiv.style.display = 'none';
-                teacherNameInput.value = '';
-            }
-        });
+        
+       // Toggle Teacher/Admin fields dynamically
+const roleRadios = document.querySelectorAll('input[name="role"]');
+const teacherIdDiv = document.getElementById('teacherId').closest('div');
+const teacherNameDiv = document.getElementById('teacherNameDiv');
+const teacherIdLabel = document.querySelector('label[for="teacherId"]');
+
+roleRadios.forEach(radio => {
+    radio.addEventListener('change', function () {
+        if (this.value === 'teacher') {
+            teacherIdDiv.style.display = 'block';
+            teacherNameDiv.style.display = 'none';
+            teacherIdLabel.textContent = "Teacher ID";
+            document.getElementById('teacherId').placeholder = "Enter your Teacher ID (e.g., T001)";
+        } else if (this.value === 'admin') {
+            teacherIdDiv.style.display = 'block';
+            teacherNameDiv.style.display = 'none';
+            teacherIdLabel.textContent = "Admin ID";
+            document.getElementById('teacherId').placeholder = "Enter Admin ID (ADMIN / A001)";
+        }
+    });
+});
+
 
         // Handle form submission
         document.getElementById('loginForm').addEventListener('submit', function(e) {
